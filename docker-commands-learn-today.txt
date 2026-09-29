@@ -1,0 +1,23 @@
+docker compose up -d
+    → Start containers in background
+
+docker compose ps
+    → Check container status
+
+docker compose logs
+    → View container logs
+
+docker compose config
+    → Validate Compose configuration
+
+docker compose -f FILE
+    → Use a specific Compose file
+
+mv
+    → Rename/move files
+
+ls
+    → List files
+
+cat
+    → Read/display a file
