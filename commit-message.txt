@@ -1,0 +1,17 @@
+Configure PostgreSQL datasource and Spring Data JPA
+
+- Add PostgreSQL driver and Spring Data JPA dependencies
+- Set up datasource and Hibernate DDL properties in application.properties
+- Update PostgreSQL user in docker-compose.yml
+
+Learned PostgreSQL + Docker commands:
+- psql -U <user>              # Connect to PostgreSQL
+- psql -h localhost -p 5332   # Connect through Docker port
+- \du                         # List PostgreSQL roles
+- \l                          # List databases
+- \q                          # Exit psql
+- CREATE DATABASE <name>;     # Create a database
+- DROP DATABASE <name>;       # Delete a database
+- docker ps                   # List running containers
+- docker compose up -d        # Start containers
+- docker compose down -v      # Stop containers and remove volumes
