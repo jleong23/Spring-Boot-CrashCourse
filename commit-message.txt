@@ -1,17 +1,36 @@
-Configure PostgreSQL datasource and Spring Data JPA
+feat(engineer): implement JPA entity, repository, service layer, and database fetching
 
-- Add PostgreSQL driver and Spring Data JPA dependencies
-- Set up datasource and Hibernate DDL properties in application.properties
-- Update PostgreSQL user in docker-compose.yml
+- Map `SoftwareEngineer` as a JPA `@Entity` with generated primary key `@Id`
+- Create `SoftwareEngineerRepository` extending `JpaRepository`
+- Create `SoftwareEngineerService` for business logic and data access
+- Refactor `SoftwareEngineerController` to use `SoftwareEngineerService` instead of hardcoded data
+- Remove temporary `commit-message.txt`
 
-Learned PostgreSQL + Docker commands:
-- psql -U <user>              # Connect to PostgreSQL
-- psql -h localhost -p 5332   # Connect through Docker port
-- \du                         # List PostgreSQL roles
-- \l                          # List databases
-- \q                          # Exit psql
-- CREATE DATABASE <name>;     # Create a database
-- DROP DATABASE <name>;       # Delete a database
-- docker ps                   # List running containers
-- docker compose up -d        # Start containers
-- docker compose down -v      # Stop containers and remove volumes
+1. Entity Mapping (SoftwareEngineer.java)
+Added @Entity annotation so Hibernate maps the class to a database table.
+Added @Id and @GeneratedValue(strategy = GenerationType.IDENTITY) to the id field to designate it as the primary key and let the PostgreSQL database handle ID generation.
+2. Repository Layer (SoftwareEngineerRepository.java)
+Created an interface extending Spring Data JPA's JpaRepository<SoftwareEngineer, Integer>.
+This provides out-of-the-box CRUD methods (such as findAll(), findById(), save(), delete()) without needing to write manual SQL queries or DAO boilerplate.
+3. Service Layer (SoftwareEngineerService.java)
+Created a class annotated with @Service to encapsulate business logic.
+Injected SoftwareEngineerRepository through constructor-based dependency injection.
+Added getAllSoftwareEngineers() which delegates to softwareEngineerRepository.findAll().
+4. Controller Layer Refactoring (SoftwareEngineerController.java)
+-Remov -emoved the hardcoded list of dummy software engineers (List.of(...)).
+Injected SoftwareEngineerService via constructor injection
+Updated the @GetMapping method (getEngineers()) to fetch live records from softwareEngineerService.getAllSoftwareEngineers().
+Injected SoftwareEngineerService via constructor injection.
+Updated the @GetMapping method (getEngineers()) to fetch live records from softwareEngineerService.getAllSoftwareEngineers().
+
+\c jasondb
+→ Connect/switch to the jasondb database
+
+\d software_engineer
+→ View the table structure and columns
+
+SELECT * FROM software_engineer;
+→ View all records in the table
+
+INSERT INTO software_engineer (...)
+→ Add a new record to the table
