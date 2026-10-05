@@ -1,36 +1,18 @@
-feat(engineer): implement JPA entity, repository, service layer, and database fetching
+Add create endpoint for SoftwareEngineer and update HTTP test requests
 
-- Map `SoftwareEngineer` as a JPA `@Entity` with generated primary key `@Id`
-- Create `SoftwareEngineerRepository` extending `JpaRepository`
-- Create `SoftwareEngineerService` for business logic and data access
-- Refactor `SoftwareEngineerController` to use `SoftwareEngineerService` instead of hardcoded data
-- Remove temporary `commit-message.txt`
+- Implement `insertSoftwareEngineer` in `SoftwareEngineerService` using `SoftwareEngineerRepository.save()`
+- Expose POST endpoint `addNewSoftwareEngineer` in `SoftwareEngineerController`
+- Update `requests.http` with a sample POST payload for local verification
 
-1. Entity Mapping (SoftwareEngineer.java)
-Added @Entity annotation so Hibernate maps the class to a database table.
-Added @Id and @GeneratedValue(strategy = GenerationType.IDENTITY) to the id field to designate it as the primary key and let the PostgreSQL database handle ID generation.
-2. Repository Layer (SoftwareEngineerRepository.java)
-Created an interface extending Spring Data JPA's JpaRepository<SoftwareEngineer, Integer>.
-This provides out-of-the-box CRUD methods (such as findAll(), findById(), save(), delete()) without needing to write manual SQL queries or DAO boilerplate.
-3. Service Layer (SoftwareEngineerService.java)
-Created a class annotated with @Service to encapsulate business logic.
-Injected SoftwareEngineerRepository through constructor-based dependency injection.
-Added getAllSoftwareEngineers() which delegates to softwareEngineerRepository.findAll().
-4. Controller Layer Refactoring (SoftwareEngineerController.java)
--Remov -emoved the hardcoded list of dummy software engineers (List.of(...)).
-Injected SoftwareEngineerService via constructor injection
-Updated the @GetMapping method (getEngineers()) to fetch live records from softwareEngineerService.getAllSoftwareEngineers().
-Injected SoftwareEngineerService via constructor injection.
-Updated the @GetMapping method (getEngineers()) to fetch live records from softwareEngineerService.getAllSoftwareEngineers().
-
-\c jasondb
-→ Connect/switch to the jasondb database
-
-\d software_engineer
-→ View the table structure and columns
-
-SELECT * FROM software_engineer;
-→ View all records in the table
-
-INSERT INTO software_engineer (...)
-→ Add a new record to the table
+REST API + Spring Boot:
+- @GetMapping → Handle GET requests to retrieve data
+- @PostMapping → Handle POST requests to create data
+- @RequestBody → Convert JSON request body into a Java object
+- Content-Type: application/json → Specify JSON request format
+- POST /api/v1/software-engineers → Create a software engineer via REST API
+- getAllSoftwareEngineers() → Retrieve all engineers through the service
+- insertSoftwareEngineer() → Pass engineer data to the repository
+- repository.save() → Save an entity to the database using JPA
+- Controller → Handles HTTP requests
+- Service → Manages application logic
+- Repository → Handles database operations
