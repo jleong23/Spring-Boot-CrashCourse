@@ -1,18 +1,14 @@
-Add create endpoint for SoftwareEngineer and update HTTP test requests
+Add find by ID endpoint for SoftwareEngineer and update HTTP test request
+s
 
-- Implement `insertSoftwareEngineer` in `SoftwareEngineerService` using `SoftwareEngineerRepository.save()`
-- Expose POST endpoint `addNewSoftwareEngineer` in `SoftwareEngineerController`
-- Update `requests.http` with a sample POST payload for local verification
+- Implement `getSoftwareEngineerById` in `SoftwareEngineerService` using `SoftwareEngineerRepository.findById()` with exception fallback
+- Expose GET endpoint `getEngineerById` mapped to `/{id}` in `SoftwareEngineerController`
+- Update `requests.http` with sample GET request by ID for local verification
 
-REST API + Spring Boot:
-- @GetMapping → Handle GET requests to retrieve data
-- @PostMapping → Handle POST requests to create data
-- @RequestBody → Convert JSON request body into a Java object
-- Content-Type: application/json → Specify JSON request format
-- POST /api/v1/software-engineers → Create a software engineer via REST API
-- getAllSoftwareEngineers() → Retrieve all engineers through the service
-- insertSoftwareEngineer() → Pass engineer data to the repository
-- repository.save() → Save an entity to the database using JPA
-- Controller → Handles HTTP requests
-- Service → Manages application logic
-- Repository → Handles database operations
+GET /{id} + Find by ID:
+- @GetMapping("{id}") → Handle GET requests for a specific ID
+- @PathVariable → Extract the ID from the URL
+- getEngineerById(id) → Pass the ID to the service layer
+- findById(id) → Search the database for the matching record
+- .orElseThrow() → Throw an error if the engineer is not found
+- IllegalStateException → Return an exception when the ID does not exist
