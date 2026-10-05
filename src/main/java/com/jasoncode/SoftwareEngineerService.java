@@ -24,4 +24,29 @@ public class SoftwareEngineerService {
         return softwareEngineerRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(id + " not found"));
     }
+
+    public void removeSoftwareEngineerById(Integer id){
+        softwareEngineerRepository.deleteById(id);
+    }
+
+    public void updateSoftwareEngineerById(Integer id, SoftwareEngineer engineer){
+        SoftwareEngineer existingEngineer = softwareEngineerRepository.findById(id).orElseThrow(() -> new IllegalStateException(id + " not found"));
+
+        existingEngineer.setName(engineer.getName());
+        existingEngineer.setTechStack(engineer.getTechStack());
+
+        softwareEngineerRepository.save(existingEngineer);
+    }
+
+    public List<SoftwareEngineer> getEngineersByTechStack(String techStack){
+        return softwareEngineerRepository.findByTechStack(techStack);
+    }
+
+    public void updateSoftwareEngineerTechStack(Integer id, String techStack) {
+        SoftwareEngineer existingEngineer = softwareEngineerRepository.findById(id).orElseThrow(() -> new IllegalStateException(id + " not found"));
+
+        existingEngineer.setTechStack(techStack);
+
+        softwareEngineerRepository.save(existingEngineer);
+    }
 }

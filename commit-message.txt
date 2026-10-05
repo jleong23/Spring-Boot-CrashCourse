@@ -1,14 +1,8 @@
-Add find by ID endpoint for SoftwareEngineer and update HTTP test request
-s
+feat(practice): complete Spring Boot exercises (CRUD, validation, query filtering, and PATCH)
 
-- Implement `getSoftwareEngineerById` in `SoftwareEngineerService` using `SoftwareEngineerRepository.findById()` with exception fallback
-- Expose GET endpoint `getEngineerById` mapped to `/{id}` in `SoftwareEngineerController`
-- Update `requests.http` with sample GET request by ID for local verification
-
-GET /{id} + Find by ID:
-- @GetMapping("{id}") → Handle GET requests for a specific ID
-- @PathVariable → Extract the ID from the URL
-- getEngineerById(id) → Pass the ID to the service layer
-- findById(id) → Search the database for the matching record
-- .orElseThrow() → Throw an error if the engineer is not found
-- IllegalStateException → Return an exception when the ID does not exist
+- Practice 1 & 2: Implement GET all and GET by ID endpoints in controller and service
+- Practice 3: Implement POST endpoint with @Valid and @NotBlank input validation
+- Practice 4 & 5: Implement DELETE and PUT endpoints with entity not-found handling
+- Practice 6: Add custom repository query method to filter engineers by tech stack
+- Practice Challenge: Implement partial update via PATCH /api/v1/software-engineers/{id}/tech-stack
+- Add test HTTP requests covering all practiced endpoints in requests.http

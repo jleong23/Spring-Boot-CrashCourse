@@ -9,10 +9,38 @@ GET http://localhost:8080/api/v1/software-engineers
 GET http://localhost:8080/api/v1/software-engineers/1
 
 ###
+## Find Engineer Techtack
+GET http://localhost:8080/api/v1/software-engineers?techStack=Java
+
+###
 POST http://localhost:8080/api/v1/software-engineers
 Content-Type: application/json
 
 {
-  "name": "Alexander ",
+  "name": "Casey ",
   "techStack": "Databases, Q"
+}
+
+###
+## DELETE by ID
+DELETE http://localhost:8080/api/v1/software-engineers/1
+
+
+###
+## UPDATE (PUT) by ID
+PUT http://localhost:8080/api/v1/software-engineers/1
+Content-Type: application/json
+
+{
+    "name": "Jason",
+    "techStack": "Java, Spring Boot, PostgreSQL"
+}
+
+###
+## PATCH By ID
+PATCH http://localhost:8080/api/v1/software-engineers/1/tech-stack
+Content-Type: application/json
+
+{
+    "techStack": "Java"
 }
